@@ -20,9 +20,19 @@ const loadMoreBtn = document.querySelector('.load-more');
 
 form.addEventListener('submit', async e => {
   e.preventDefault();
+
   const query = e.target.elements['search-text'].value.trim();
   if (!query) return;
 
+  // if (!query) {
+  //   iziToast.warning({
+  //     title: 'Warning',
+  //     message: 'Please enter a search term.',
+  //     position: 'topRight',
+  //   });
+  //   // form.reset();
+  //   return;
+  // }
   currentQuery = query;
   currentPage = 1;
   clearGallery();
@@ -43,7 +53,8 @@ form.addEventListener('submit', async e => {
 
     createGallery(data.hits);
     if (totalHits > 15) showLoadMoreButton();
-  } catch (err) {
+    form.reset();
+  } catch (error) {
     iziToast.error({ message: 'Something went wrong.', position: 'topRight' });
   } finally {
     hideLoader();
@@ -68,7 +79,7 @@ loadMoreBtn.addEventListener('click', async () => {
         position: 'topRight',
       });
     }
-  } catch (err) {
+  } catch (error) {
     iziToast.error({
       message: 'Error loading more images.',
       position: 'topRight',

@@ -117,5 +117,5 @@ button:hover {
 .load-more {
     width: 125px;
     height: 40px;
-    margin: 0 auto;
+    margin: 0 auto 32px;
 }
